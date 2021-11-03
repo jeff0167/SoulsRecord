@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+		}
+
+		td {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 10px;
+			width: 250px;
+		}
+
+		.Word {
+			text-align: left;
+			padding: 10px;
+			width: 150px;
+		}
+
+		tr:nth-child(odd) {
+			background-color: #f5f5f5;
+		}
+	</style>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="./assets/styles.css" /> -->
+	<title>Games</title>
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+
+<body>
+	<div id="app">
+		<label for="word" style="font-weight: 600; font-size: 40px;">Souls souls souls</label><br>
+		<input id="GameByID_InputField" v-model="currentGameId" @keyup.enter="GetById" type="number" id="GameId" placeholder="Type id...">		
+		<button id="GameByID_Button" v-on:click="GetById">Get soul by id</button>
+		<br><br><br><br>
+
+		<div id="ShowSingleGame" v-show="currentGameObject.id > 0">
+		<h1>soul by id</h1>
+		<table>
+			<thead><th v-for="(value, name) in currentGameObject">{{name}}</th></thead>
+			<tr><td id="GameObjectById" v-for="i in currentGameObject">{{i}}</td></tr>
+		</table>
+		</div>
+
+		<br><br>
+
+		<div>
+		<table>
+			<h1>all souls</h1>
+			<thead><th v-for="(value, name) in currentGameObject">{{name}}</th></thead>
+			<tr v-for="value in games" id="ListOfGames"><td v-for="i in value">{{i}}</td></tr>
+		</table>
+		</div>
+
+		<br><br>
+		<div>
+		<input id="GameByTitle_InputField" v-model="currentGameTitle" @keyup.enter="GetAllByTitle" type="text" id="GameId" placeholder="Type name of soul...">		
+		<button id="GameByTitle_Button" v-on:click="GetAllByTitle">Get souls by title</button>
+		<br><br>
+		<div id="ShowAllGames" v-show="selectedGames.length > 0">
+			<h1>souls by name</h1>
+		<table>
+			<thead><th v-for="(value, name) in currentGameObject">{{name}}</th></thead>
+			<tr id="GameObjectsByTitle" v-for="value in selectedGames"><td v-for="i in value">{{i}}</td></tr>
+		</table>
+		</div>
+
+	</div>
+
+	<script src="./Main.js"></script>
+
+	<script>
+		  const mountedApp = app.mount('#app')
+	</script>
+</body>
+
+</html>
